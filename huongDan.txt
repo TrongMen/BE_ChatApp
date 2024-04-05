@@ -1,0 +1,9 @@
+POST:  http://localhost:5000/api/messages/send/:id (lấy id của user sau trong database nhớ xóa :id và bỏ id vào)
+
+
+Body -> raw -> JSON
+
+{
+	"message":"Nhập chữ vào đây"
+
+}
