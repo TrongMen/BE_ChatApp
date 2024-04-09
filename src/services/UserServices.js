@@ -1,6 +1,11 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
-const { genneralAccessToken, genneralRefreshToken, generateTokenAndSetCookie, generateJWTToken } = require('./JwtService');
+const {
+    genneralAccessToken,
+    genneralRefreshToken,
+    generateTokenAndSetCookie,
+    generateJWTToken,
+} = require('./JwtService');
 
 const createUser = (newUser) => {
     return new Promise(async (resolve, reject) => {
@@ -71,7 +76,7 @@ const loginUser = (userLogin) => {
                 id: checkUser.id,
                 isAdmin: checkUser.isAdmin,
             });
-            
+
             resolve({
                 status: 'OK',
                 message: 'SUCCESS',
@@ -98,7 +103,7 @@ const updateUser = (id, data) => {
                     massage: 'User is not defined',
                 });
             }
-            
+
             const updateUser = await User.findByIdAndUpdate(id, data, { new: true });
             console.log('id update', id);
             console.log('data update', data);
@@ -130,15 +135,13 @@ const addFriend = (id, newFriend) => {
             checkUser.phoneBooks.push(newFriend);
 
             const updatedUser = await checkUser.save();
-            
-          
+
             resolve({
                 status: 'OK',
                 message: 'Friend added successfully',
                 data: updatedUser,
             });
         } catch (error) {
-           
             reject(error);
         }
     });
@@ -157,7 +160,7 @@ const deleteUser = (id) => {
                 });
             }
             await User.findByIdAndDelete(id);
-            
+
             resolve({
                 status: 'OK',
                 message: 'DELETE USER SUCCESS',
@@ -211,7 +214,7 @@ const getDetailByPhone = (phone) => {
     return new Promise(async (resolve, reject) => {
         try {
             const user = await User.findOne({ phone: phone });
-            console.log(user)
+            console.log(user);
             if (user == null) {
                 resolve({
                     status: 'ERR',
@@ -229,11 +232,11 @@ const getDetailByPhone = (phone) => {
         }
     });
 };
-const  getAllFriend = (id) => {
+const getAllFriend = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
             const user = await User.findOne({ _id: id });
-            console.log(user)
+            console.log(user);
             if (user == null) {
                 resolve({
                     status: 'ERR',
@@ -265,15 +268,15 @@ const addInvite = (id, data) => {
                     massage: 'User is not defined',
                 });
             }
-                // Tạo một bản sao của mảng invite và thêm dữ liệu mới vào đó
-                // const newInviteArray = [...checkUser.invite ];
-                // checkUser.invite.push({
-                //     id: data.invite.id,
-                //     name: data.invite.name,
-                //     phone: data.invite.phone
-                // })
+            // Tạo một bản sao của mảng invite và thêm dữ liệu mới vào đó
+            // const newInviteArray = [...checkUser.invite ];
+            // checkUser.invite.push({
+            //     id: data.invite.id,
+            //     name: data.invite.name,
+            //     phone: data.invite.phone
+            // })
 
-            checkUser.invite.push(data)
+            checkUser.invite.push(data);
             const updateUser = await checkUser.save();
             console.log('updateUser', updateUser);
             // console.log('access_Token', access_Token);
@@ -303,15 +306,15 @@ const addListFriend = (id, data) => {
                     massage: 'User is not defined',
                 });
             }
-                // Tạo một bản sao của mảng invite và thêm dữ liệu mới vào đó
-                // const newInviteArray = [...checkUser.invite ];
-                // checkUser.invite.push({
-                //     id: data.invite.id,
-                //     name: data.invite.name,
-                //     phone: data.invite.phone
-                // })
+            // Tạo một bản sao của mảng invite và thêm dữ liệu mới vào đó
+            // const newInviteArray = [...checkUser.invite ];
+            // checkUser.invite.push({
+            //     id: data.invite.id,
+            //     name: data.invite.name,
+            //     phone: data.invite.phone
+            // })
 
-            checkUser.listAddFriend.push(data)
+            checkUser.listAddFriend.push(data);
             const updateUser = await checkUser.save();
             console.log('updateUser', updateUser);
             // console.log('access_Token', access_Token);
