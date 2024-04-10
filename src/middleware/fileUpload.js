@@ -32,7 +32,7 @@ function checkFileType(file, cb) {
     if (extname && mimetype) {
         return cb(null, true);
     } else {
-        cb('Error: Images Only (jpeg, jpn, png, gif)!');
+        cb('Error: Images Only (jpeg, jpg, png, gif, docx, doc, xls, xlsx, ppt, pptx, mp4, avi, mkv, mov)!');
     }
 }
 

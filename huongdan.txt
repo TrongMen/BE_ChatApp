@@ -1,1 +1,11 @@
 MONGO_DB=mongodb+srv://thaidp2002:chatappdb@chatappdatabase.mebfcgt.mongodb.net/?retryWrites=true&w=majority
+
+
+
+Trước tiên nhớ bỏ link vô MONGO_DB 
+
+CÁC BƯỚC TEST POSTMAN PHẦN UPLOAD:
+B1:http://localhost:3001/api/messages/upload/:id (:id login user sau đó lấy UserId)
+B2: Chọn Body -> form data
+B3: Thêm key mới là file -> chọn file
+B4: Select file -> Send
