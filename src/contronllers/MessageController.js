@@ -7,6 +7,15 @@ const { getReceiverSocketId, io } = require("../socket/socket.js");
 		const { message } = req.body;
 		const { id: receiverId } = req.params;
 		const senderId = req.user._id;
+		let fileData = null;
+        let filePath = null; // Biến lưu đường dẫn của file
+        if (req.files && req.files['file']) {
+            fileData = req.files['file'][0].buffer;
+            filePath = req.files['file'][0].path; // Lấy đường dẫn của file
+            // In đường dẫn của file (tạm thời sử dụng để kiểm tra)
+            console.log('Đường dẫn của file:', filePath);
+        }
+		
 
 		let conversation = await Conversation.findOne({
 			participants: { $all: [senderId, receiverId] },
@@ -22,7 +31,15 @@ const { getReceiverSocketId, io } = require("../socket/socket.js");
 			senderId,
 			receiverId,
 			message,
+			file:fileData,
+			
+
 		});
+		// if (req.body.message) {
+        //     newMessageData.message = req.body.message;
+        // }
+
+		// const newMessage = new Message(newMessageData);
 
 		if (newMessage) {
 			conversation.messages.push(newMessage._id);
@@ -30,7 +47,6 @@ const { getReceiverSocketId, io } = require("../socket/socket.js");
 
 		// await conversation.save();
 		// await newMessage.save();
-
 		// this will run in parallel
 		await Promise.all([conversation.save(), newMessage.save()]);
 

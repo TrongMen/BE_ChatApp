@@ -32,7 +32,8 @@ const genneralRefreshToken = (payload) => {
     return refreshToken;
 };
 
-const refreshTokenJwtService = (token, res) => { // Thêm tham số res vào refreshTokenJwtService
+const refreshTokenJwtService = (token, res) => {
+    // Thêm tham số res vào refreshTokenJwtService
     return new Promise(async (resolve, reject) => {
         try {
             jwt.verify(token, process.env.REFRESH_TOKEN, async (err, user) => {
@@ -52,7 +53,7 @@ const refreshTokenJwtService = (token, res) => { // Thêm tham số res vào ref
                     id: user.id,
                     isAdmin: user?.isAdmin,
                 });
-                
+
                 resolve({
                     status: 'OK',
                     message: 'SUCCESS',
