@@ -1,5 +1,5 @@
 const express = require('express');
-const { getMessages, sendMessage } = require('../contronllers/MessageController.js');
+const { getMessages, sendMessage, sendUploadFile } = require('../contronllers/MessageController.js');
 const { protectRoute } = require('../middleware/authMiddleware');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
@@ -13,8 +13,8 @@ router.post('/send/:id', protectRoute, sendMessage);
 
 //----------UploadFile----------
 
-//[POST] http://localhost:3001/api/messages/send-media/:id
+//[POST] http://localhost:3001/api/messages/upload/:id
 // 
-router.post('/send-media/:id',protectRoute,upload.fields([{ name: 'file', maxCount: 1 }, { name: 'image', maxCount: 1 }]), sendMessage);
+router.post('/upload/:id', protectRoute, upload.single('file'), sendUploadFile);
 
 module.exports = router;
